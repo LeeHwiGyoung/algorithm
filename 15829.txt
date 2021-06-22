@@ -1,0 +1,23 @@
+#include <iostream>
+using namespace std;
+int main(){
+ int tmp;
+ string s;
+ int len;
+ int result = 0;
+ cin >> len >> s; 
+ for(int i =0 ;i<len;i++)
+ {
+    tmp = s[i];
+	tmp -= 96;
+if(i ==0)
+     result = result + tmp*1;
+	 else{
+	for(int j = 0 ; j < i ; j++)
+     	tmp = tmp *31;
+	result = result + tmp;
+  }
+ } 
+  cout << result%1234567891 << endl;
+
+}
