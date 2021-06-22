@@ -1,0 +1,44 @@
+#include<iostream>
+#include<algorithm>
+using namespace std;
+class location  {
+private:
+	int x, y;
+public:
+	location(){
+		this->x = 0;
+		this->y = 0;
+	}
+	void setlocation(int x, int y) {
+		 this->x= x;
+		 this->y =y;
+	}
+	bool operator<(location a) {
+		if (this->x < a.x)
+			return true;
+		else if (this->x == a.x && this->y < a.y)
+			return true;
+		else
+			return false;
+	}
+	void print()
+	{
+		cout << this->x << " " << this->y<< "\n";
+	}
+};
+int main()
+{
+	int num, x, y;
+	cin >> num;
+	location* a = new location[num];
+	for (int i = 0; i < num; i++)
+	{	
+		cin >> x >> y;
+		a[i].setlocation(x, y);
+	}
+	sort(a, a + num);
+	for (int i = 0; i < num; i++)
+	{
+		a[i].print();
+	}
+}
