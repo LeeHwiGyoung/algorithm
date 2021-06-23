@@ -1,0 +1,63 @@
+
+#include<iostream>
+using namespace std;
+void merge(int* arr, int low, int mid, int high)
+{
+	int* tmp = new int[high+1];
+	int i, j, k;
+	 i = low, j = mid+1 , k = low;
+	 while (i <= mid && j <= high) {
+		 if (arr[i] < arr[j])
+		 {
+			 tmp[k] = arr[i];
+			 i++;
+		 }
+		 else {
+			 tmp[k] = arr[j];
+			 j++;
+		 }
+		 k++;
+	 }
+	 if(i > mid)
+		 while (j <= high)
+		 {
+			 tmp[k] = arr[j];
+			 k++; j++;
+		 }
+	 else
+		 while (i <= mid)
+		 {
+			 tmp[k] = arr[i];
+			 k++; i++;
+		 }
+	 for (int k = low; k <= high; k++)
+	 {
+		 arr[k] = tmp[k];
+	 }
+	 delete[] tmp;
+}
+
+void mergesort(int* arr, int low, int high) {
+	int mid;
+	if (high > low)
+	{
+		mid = (high + low) / 2;
+		mergesort(arr, low, mid);
+		mergesort(arr, mid + 1, high);
+		merge(arr, low, mid, high);
+	}
+}
+int main()
+{
+	int num;
+	cin >> num;
+	int* arr = new int[num];
+	for (int i = 0; i < num; i++) {
+		cin >> arr[i];
+	}
+	mergesort(arr, 0, num-1);
+	for (int i = 0; i < num; i++)
+	{
+		cout << arr[i] << "\n";
+	}
+}
