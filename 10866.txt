@@ -1,0 +1,75 @@
+#include<iostream>
+#include<deque>
+using namespace std;
+int main()
+{
+	int num;
+	cin >> num;
+
+	deque<int> deck;
+
+	for (int i = 0; i < num; i++)
+	{
+		string str;
+		cin >> str;
+		int n;
+		if (str == "push_front")
+		{
+			cin >> n;
+			deck.push_front(n);
+		}
+		else if (str == "push_back")
+		{
+			cin >> n;
+			deck.push_back(n);
+		}
+		else if (str == "pop_front")
+		{
+			if (!deck.empty())
+			{
+				cout << deck.front() << "\n";
+				deck.pop_front();
+			}
+			else
+			{
+				cout << "-1" << "\n";
+			}
+		}
+		else if (str == "pop_back")
+		{
+			if (!deck.empty())
+			{
+				cout << deck.back() << "\n";
+				deck.pop_back();
+			}
+			else
+			{
+				cout << "-1" << "\n";
+			}
+		}
+		else if(str == "size")
+		{
+			cout << deck.size() << "\n";
+		}
+		else if (str == "empty")
+		{
+			if (deck.empty())
+				cout << "1" << "\n";
+			else
+				cout << "0" << "\n";
+		}
+		else if (str == "front")
+		{
+			if (!deck.empty())
+				cout << deck.front() << "\n";	
+			else
+				cout << "-1" << "\n";
+		}
+		else if (str == "back") {
+			if (!deck.empty())
+				cout << deck.back() << "\n";
+			else
+				cout << "-1" << "\n";
+		}
+	}
+}
