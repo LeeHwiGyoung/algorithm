@@ -1,0 +1,55 @@
+#include<iostream>
+#include<algorithm>
+using namespace std;
+class timetable
+{
+private:
+	int start;
+	int end;
+public:
+	timetable()
+	{
+		this->start = 0;
+		this->end = 0;
+	}
+	void settimetable(int start, int end) {
+		this->start = start;
+		this->end = end;
+	}
+	int get_end()	{
+		return this->end;
+	}
+	int get_start() {
+		return this->start;
+	}
+	bool operator<(timetable& a)
+	{
+		if (this->end < a.end)
+			return true;
+		else if (a.end == this->end && this->start < a.start)
+			return true;
+		else
+			return false;
+	}
+};
+int main()
+{
+	int num, start, end, cnt = 0 , minend = 0;
+	cin >> num;
+	timetable* table = new timetable[num];
+	for (int i = 0; i < num; i++)
+	{
+		cin >> start >> end;
+		table[i].settimetable(start, end);
+	}
+	sort(table, table + num - 1);
+	for (int i = 0; i < num; i++)
+	{
+		if (table[i].get_end() >= minend && table[i].get_start() >= minend)
+		{
+			cnt+=1;
+			minend = table[i].get_end();
+		}
+	}
+	cout << cnt << "\n";
+}

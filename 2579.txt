@@ -1,0 +1,32 @@
+#include<iostream>
+using  namespace std;
+int max(int A, int B)
+{
+	if (A > B)
+		return A;
+	else
+		return B;
+}
+int main()
+{
+	int num;
+	int step[300];
+	int score[300];
+	cin >> num;
+	for (int i = 0; i < num; i++)
+	{
+		cin >> step[i];
+	}
+	for (int i = 0; i < num; i++)
+	{
+		if (i == 0)
+			score[i] = step[i];
+		else if (i == 1)
+			score[i] = step[i - 1] + step[i];
+		else if (i == 2)
+			score[i] = max(step[i - 2] + step[i], step[i - 1] + step[i]);
+		else
+			score[i] = max(score[i - 2] + step[i], score[i - 3] + step[i - 1] + step[i]);
+	}
+	cout << score[num-1] << endl;
+}
