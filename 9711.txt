@@ -1,0 +1,25 @@
+#include<iostream>
+
+using namespace std;
+int main()
+{
+	int T;
+	scanf("%d", &T);
+	for (int j = 1; j <= T; j++)
+	{
+		int p, q; // p == p번째 피보나치 수 q ==p를 q로 나눌  수
+	    int result;
+		scanf("%d %d",&p, &q);
+		long int fib[10000];
+		for (int i = 0; i <= p; i++)
+		{
+			if (i == 0 || i == 1)
+				fib[i] = 1;
+			else
+				fib[i] = fib[i - 1]%q + fib[i - 2]%q;
+			fib[i] = fib[i] % q;
+		}
+		result = fib[p-1];
+		printf("Case #%d: %d\n", j, result);
+	}
+}
