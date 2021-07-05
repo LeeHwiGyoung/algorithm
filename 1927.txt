@@ -1,0 +1,41 @@
+#include<iostream>
+#include<queue>
+using namespace std;
+struct comp {
+	int value;
+	comp(int num) : value(num) {}    // 생성자 정의
+	
+};
+struct cmp {
+	bool operator()(comp a, comp b) {
+		return a.value > b.value;
+	}
+};
+
+int main()
+{
+	priority_queue <comp,vector<comp>,cmp> pq;
+	int T;  int num;  comp s = 0;
+	scanf("%d", &T);
+	for (int i = 0; i < T; i++)
+	{
+		scanf("%d", &num);
+		if (num == 0)
+		{
+			if (pq.empty())
+			{
+				printf("0\n");
+			}
+			else
+			{
+				s = pq.top();
+				printf("%d\n", s);
+				pq.pop();
+			}
+		}
+		else
+		{
+			pq.push(num);
+		}
+	}
+}
