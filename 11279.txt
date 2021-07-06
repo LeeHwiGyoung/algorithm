@@ -1,0 +1,32 @@
+#include<iostream>
+#include<queue>
+using namespace std;
+
+
+int main()
+{
+	priority_queue <int, vector<int>> pq;
+	int T;  int num;  int s = 0;
+	scanf("%d", &T);
+	for (int i = 0; i < T; i++)
+	{
+		scanf("%d", &num);
+		if (num == 0)
+		{
+			if (pq.empty())
+			{
+				printf("0\n");
+			}
+			else
+			{
+				s = pq.top();
+				printf("%d\n", s);
+				pq.pop();
+			}
+		}
+		else
+		{
+			pq.push(num);
+		}
+	}
+}
