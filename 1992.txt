@@ -1,0 +1,49 @@
+#include<iostream>
+using namespace std;
+void quadtree(int x_start, int y_start, string view[], int n)
+{
+	if (n == 1) {
+		printf("%c", view[x_start][y_start]);
+		return;
+	}
+	else {
+		char standard = view[x_start][y_start];	bool _switch = false;
+		for (int i = x_start; i < x_start + n; i++) {
+			if (_switch == true)
+				break;
+			for (int j = y_start; j < y_start + n; j++)
+				if (standard != view[i][j])
+				{
+					_switch = true;
+					break;
+				}
+		}
+		if (_switch)
+		{
+			printf("(");
+			for (int i = x_start; i < x_start + n; i += n / 2) {
+				for (int j = y_start; j < y_start + n; j += n / 2)
+					quadtree(i, j, view, n / 2);
+			}
+			printf(")");
+
+		}
+		else
+		{
+			printf("%c", standard);
+		}
+	}
+}
+
+int main()
+{
+	int num; 
+	cin >> num;
+	string* view = new string [num];
+	for (int i = 0; i < num; i++)
+	{
+		cin >> view[i];
+	}
+	quadtree(0, 0, view, num);
+	printf("\n");
+}

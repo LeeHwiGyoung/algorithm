@@ -1,0 +1,33 @@
+#include<iostream>
+using namespace std;
+int n, m;
+int arr[9];
+bool check[9] = {false, };
+void tracking(int idx, int cnt)
+{
+	if (cnt == m)
+	{
+		for (int i = 0; i < m; i++)
+		{
+			cout << arr[i] << " ";
+		}
+		cout << "\n";
+	}
+
+	for (int i = idx; i <= n; i++)
+	{
+		if (!check[i])
+		{
+			check[i] = true;
+			arr[cnt] = i;
+			tracking(i + 1 ,cnt +1);
+			check[i] = false;
+		}
+	}
+}
+int main()
+{
+	bool* check;
+	cin >> n>> m;
+	tracking(1,0);
+}
