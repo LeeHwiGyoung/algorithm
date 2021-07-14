@@ -1,0 +1,57 @@
+#include<iostream>
+#include<algorithm>
+using namespace std;
+class profile
+{
+private:
+	int age;
+	string name;
+	int order;
+public:
+	profile()
+	{
+		this->age = 0;
+		this->name = " ";
+	}
+	void set_profile(int age, string name,int order)
+	{
+		this->age = age;
+		this->name = name;
+		this->order = order;
+	}
+	bool operator<(profile a)
+	{
+		if (this->age == a.age)
+		{
+			if (this->order < a.order)
+				return true;
+			else
+				return false;
+		}
+		else if (this->age < a.age)
+			return true;
+		else
+			return false;
+	}
+	void print()
+	{
+		cout << this->age << " " << this->name << "\n";
+	}
+};
+
+int main()
+{
+	int num;
+	int age;
+	string name;
+	cin >> num;
+	profile* p = new profile[num];
+	for (int i = 0; i < num; i++)
+	{
+		cin >> age >> name;
+		p[i].set_profile(age, name,i);
+	}
+	sort(p, p + num);
+	for (int i = 0; i < num; i++)
+		p[i].print();
+}

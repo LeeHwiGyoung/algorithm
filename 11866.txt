@@ -1,0 +1,33 @@
+#include<iostream>
+#include<queue>
+using namespace std;
+int main()
+{
+	queue<int> q;
+	int n, k, cnt = 0; 
+	cin >> n >> k; // n == 수 k == 카운트 
+	for (int i = 1; i <= n; i++)
+	{
+		q.push(i);
+	}
+	cout << "<";
+	while (!q.empty())
+	{
+		int tmp = q.front();
+		q.pop();
+		cnt++;
+		if (cnt == k)
+		{
+			cnt = 0;
+			cout << tmp;
+			if (q.empty())
+				cout << ">\n";
+			else
+				cout << ", ";
+		}
+		else
+		{
+			q.push(tmp);
+		}
+	}
+}
