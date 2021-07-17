@@ -1,0 +1,17 @@
+#include<iostream>
+using namespace std;
+int x, y;
+void polynomial(int a,int b, int c, int d, int  e, int f){
+	int tmp;
+	tmp = a * e - b * d;
+	x = e * c + -b * f;
+	y = -d * c + a * f;
+	x = x / tmp;
+	y = y / tmp;
+	cout << x << " " << y << "\n";
+}
+int main() {
+	int a, b, c, d, e, f;
+	cin >> a >> b >> c >> d >> e >> f;
+	polynomial(a, b, c, d, e, f);
+}
