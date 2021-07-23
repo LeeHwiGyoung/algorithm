@@ -1,0 +1,66 @@
+#include<iostream>
+#include<vector>
+#include<queue>
+using namespace std;
+vector<int> ru[200001];
+int time[200001] = { 0, };
+int cnt[200001] = { 0, };
+bool believe[200001];
+
+int main()
+{
+    int start_num;
+    int people;
+    cin >> people;
+    
+    fill(believe,believe + 200001, false);
+    queue <pair<int, int>> q;
+    for (int i = 1; i <= people; i++)
+    {
+        while (1)
+        {
+            int person;
+            cin >> person;
+            if (person == 0)
+                break;
+            else
+                ru[i].push_back(person);
+        }
+    }
+    cin >> start_num;
+    for (int i = 0; i < start_num; i++)
+    {
+        int start;
+        cin >> start;
+        believe[start] = true;
+        q.push({ start, 0 });
+    }
+    while (!q.empty())
+    {
+        int node = q.front().first;
+        int t = q.front().second;
+        q.pop();
+        for (int i = 0; i < ru[node].size(); i++)
+        {
+            int next = ru[node][i];
+            if (believe[next] == true)
+                continue;
+            else {
+                cnt[next] += 1;
+                if (cnt[next] * 2 >= ru[next].size())
+                {
+                    time[next] = t + 1;
+                    believe[next] = true;
+                    q.push({ next,t + 1 });
+                }
+            }
+        }
+    }
+    for (int i = 1; i <= people; i++)
+    {
+        if(believe[i] == false && time[i] == 0) 
+            cout << -1 << " ";
+        else
+            cout << time[i] << " ";
+    }
+}
