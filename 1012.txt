@@ -1,0 +1,57 @@
+#include<iostream>
+#include<string.h>
+using namespace std;
+int ground[50][50];
+bool visit[50][50];
+int dx[] = { -1, 1, 0, 0 };
+int dy[] = { 0, 0, -1, 1 };
+
+void dfs(int x, int y , int row ,int column)
+{
+	visit[x][y] = true;
+	for (int i = 0; i < 4; i++)
+	{
+		int nx = x + dx[i];
+		int ny = y + dy[i];
+		if (nx < 0 || nx >= row || ny < 0 || ny >= column)
+			continue;
+		if (ground[nx][ny] == 1 && visit[nx][ny] == false)
+		{
+			dfs(nx, ny, row, column);
+		}
+	}
+}
+int main()
+{
+	int test;
+	int row;
+	int column;
+	int cabbage;
+	cin >> test;
+	
+	for (int i = 0; i < test; i++)
+	{
+		for (int i = 0; i < 50; i++) {
+			memset(ground[i], 0, sizeof(int) * 50);
+			memset(visit[i], 0, sizeof(int) * 50);
+		}
+		int cnt = 0;
+		cin >> row >> column >> cabbage;
+		for (int j = 0; j < cabbage; j++)
+		{
+			int x, y;
+			cin >> x >> y;
+			ground[x][y] = 1;
+			
+		}
+		for (int x = 0; x < row; x++)
+			for (int y = 0; y < column; y++)
+				if (visit[x][y] == false && ground[x][y] == 1)
+				{
+					dfs(x, y, row, column);
+					cnt++;
+				}
+		cout << cnt << "\n";
+		
+	}
+}
