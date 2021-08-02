@@ -1,0 +1,38 @@
+#include<iostream>
+#include<string>
+#include<stack>
+using namespace std;
+int main()
+{
+	ios_base::sync_with_stdio(false);
+	cin.tie(nullptr);
+	cout.tie(nullptr);
+	int test;
+	cin >> test; //cin은 '\n' 변수에 담지 않아 입력버퍼에 남아 있는데
+	cin.ignore(); // cin.ignore()를 사용해서 맨 앞의 문자 '\n'를 지워줘야 제대로 된 입력을 받을 수 있다.
+	for (int i = 0; i < test; i++)
+	{
+		string str;
+		getline(cin, str); // 마지막으로 입력을 받은 시점부터 '\n'가 나올 때까지 입력을 받음
+		str += '\n';
+		stack <char> st;
+		for (int j = 0; j < str.length(); j++)
+		{
+			
+			if (str[j] == ' ' || str[j] == '\n')
+			{
+				while (!st.empty())
+				{
+					cout << st.top();
+					st.pop();
+				}
+				cout << " ";
+			}
+			else
+			{
+				st.push(str[j]);
+			}
+		}
+		cout << "\n";
+	}
+}
