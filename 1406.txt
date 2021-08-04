@@ -1,0 +1,69 @@
+#include<iostream>
+#include<stack>
+using namespace std;
+int main()
+{
+	ios_base::sync_with_stdio(false);
+	cin.tie(nullptr);
+	cout.tie(nullptr);
+	string str; // 초기 문자열
+	int num; // 연산 갯수
+	stack <char> left; // 커서 왼쪽 stack
+	stack <char> right; // 커서 오른쪽 stack
+	stack <char> reverse_left; //  left stack은 한 번 더 뒤집어서 출력해야함 출력은 커서 기준이 아니기 때문
+	cin >> str; // 초기 문자열 입력
+	for (int i = 0; i < str.length(); i++) // 문자열 크기만큼 left에 push
+	{
+		left.push(str[i]);
+	}
+	cin >> num; //연산 횟수 입력
+	for (int i = 0; i < num; i++) 
+	{
+		char x; char tmp; //x 는 연산 종류 tmp는 연산에 따라 옮길 글자
+		cin >> x; // 연산 입력
+		if (x == 'L') // x가 L이면
+		{
+			if (!left.empty()) // 커서가 가장 왼쪽이 아닐 때
+			{
+				tmp = left.top(); // left의 top을 right로 push
+				left.pop();
+				right.push(tmp);
+			}
+		}
+		else if (x == 'D')// x가 D면
+		{
+			if (!right.empty()) // 커서가 가장 오른쪽이 아닐 때
+			{
+				tmp = right.top(); //right의 top을 left로 push
+				right.pop();
+				left.push(tmp);
+			}
+		}
+		else if (x == 'B')// x가 B이면
+		{
+			if (!left.empty()) // 커서가 가장 왼쪽이 아닐 때
+			{
+				left.pop(); //left를 pop하여 커서 왼쪽을 지움
+			}
+		}
+		else // x가 P이면
+		{
+			char add;  // 추가할 문자를 받아서
+			cin >> add;
+			left.push(add); //left에 push 하여 커서 왼쪽에 문자를 추가한 것처럼 만듬 
+		}
+	}
+	while (!left.empty()) { //left 스택이 비어있지 않으면
+		reverse_left.push(left.top()); //reverse 하여 저장
+		left.pop();
+	}
+	while (!reverse_left.empty()) // reverse한 left를 출력
+	{
+		cout << reverse_left.top();
+		reverse_left.pop();
+	}
+	while (!right.empty()) { // 커서 기준 right를 출력
+		cout << right.top();
+		right.pop();
+	}
+}

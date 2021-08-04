@@ -1,0 +1,50 @@
+#include<iostream>
+#include<stack>
+using namespace std;
+int main()
+{
+	ios_base::sync_with_stdio(false);
+	cin.tie(nullptr);
+	cout.tie(nullptr);
+	int num;
+	cin >> num;
+	int last = 0; // stack 에 마지막으로 들어간 수 1부터 시작
+	string ans; // 결과
+	stack <int> st; // int형 스택
+	while(num--){ // 수열의 크키가 num
+		int x; // 수열의 수
+		cin >> x;
+		if (x > last) // 현재 수열의 수가 마지막으로 stack에 들어간 수 보다 크면
+		{
+			while (x > last) // stack에 마지막으로 들어간 수가 x와 같아질 때까지 push
+			{
+				last++;
+				st.push(last);
+				ans += '+';	 
+			}
+			st.pop(); //현재 last와 x가 같으므로 pop;
+			ans += '-'; 
+		}
+		else {
+			bool found = false; // 스택의 top보다 수열 x가 작다면
+			if (!st.empty()) // 스택이 비어있지 않을때
+			{
+				int top = st.top();
+				st.pop();
+				ans += "-";
+				if (x == top)
+					found = true;
+			}
+			if (!found) // 스택의 top보다 수열 x가 작다면
+			{
+				cout << "NO" << "\n"; //스택의 특성상 가장 마지막의 수만 pop 할 수 있음
+				return 0;
+			}
+		}
+	}
+	for (int i = 0; i < ans.length(); i++) {
+		cout << ans[i] << '\n';
+	}
+	
+		return 0;
+}
