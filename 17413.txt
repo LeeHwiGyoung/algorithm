@@ -1,0 +1,54 @@
+#include<iostream>
+#include<string>
+#include<stack>
+using namespace std;
+int main()
+{
+	ios_base::sync_with_stdio(false);
+	cin.tie(nullptr);
+	cout.tie(nullptr);
+	bool _switch = false; //태그인지  아닌지 구분해줄 boolean 변수
+	string str; 
+	getline(cin, str); // 마지막으로 입력을 받은 시점부터 '\n'가 나올 때까지 입력을 받음
+	str += '\n'; //문장의 끝을 구분하기 위해 추가
+	stack <char> st;
+	for (int j = 0; j < str.length(); j++)	{
+			if (str[j] == '<') // 태그의 시작이면
+			{
+				_switch = true; //_switch를 true로 바꾸고
+				while (!st.empty()) //스택이 비어있지 않으면 뒤집어서 출력 , 입력 예시 tag<close>
+				{
+					cout << st.top(); 
+					st.pop();
+				}
+			}
+			else if (str[j] == '>') //태그의 끝이면
+			{
+				_switch = false; //_switch 를 false로 바꾸고
+				cout << str[j]; //>를 출력한 뒤 
+				continue; //continue 예외적으로 출력해줘야 하기 때문에
+			}
+			if (_switch == true) // 태그 안쪽의 글자들은
+			{
+				cout << str[j]; // 그대로 출력
+			}
+			else { // 태그 밖의 글자들은 스택에 넣어 반대로 출력
+				if (str[j] == ' ' || str[j] == '\n')
+				{
+					while (!st.empty())
+					{
+						cout << st.top();
+						st.pop();
+					}
+					cout << " ";
+				}
+				else
+				{
+					st.push(str[j]);
+				}
+			}
+		}
+	cout << "\n";
+}
+[출처] BOJ 17413 단어 뒤집기2|작성자 휘갱
+
